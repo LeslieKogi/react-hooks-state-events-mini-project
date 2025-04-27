@@ -1,30 +1,17 @@
-import React,{useState} from "react";
+import React from "react";
 import Task from "./Task";
 
-function TaskList({tasks, categoryFilter}) {
-  const [taskList, setTasklist]=useState(tasks)
-
-
-  function handleDelete(text){
-   console.log("Deleted")
-   
-   const filteredTasks=tasks.filter((task)=>(
-    task.text !== text
-   ))
-   setTasklist(filteredTasks)
-
-  }
-  const tasksToDisplay=taskList.filter((task)=>{
-   if(categoryFilter ==="All") return true
-   return task.category === categoryFilter
-
-})
-
+function TaskList({ tasks, onDeleteTask }) {
   return (
-    <div  className="tasks">
-      {tasksToDisplay.map((task)=>(
-        <Task keyt={task.text} text={task.text} category={task.category} handleDelete={handleDelete}/>))}
-      
+    <div className="tasks">
+      {tasks.map((task) => (
+        <Task
+          key={task.text}
+          text={task.text}
+          category={task.category}
+          onDelete={onDeleteTask}
+        />
+      ))}
     </div>
   );
 }
